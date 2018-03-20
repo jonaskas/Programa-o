@@ -12,5 +12,5 @@ while not hit:
         hit = True
     elif value > NUMBER:
         print("your number is greater")
-    else:
+    else :
         print("your number is lower")
