@@ -1,5 +1,5 @@
 """
-Exercico 2
+Exercicio 2
 """
 primeiro_numero = int(input('Introduza o primeiro numero: '))
 segundo_numero = int(input('Introduza o segundo numero: '))
