@@ -15,7 +15,7 @@ elif operacao == '-':
 elif operacao == '*':
     resultado = primeiro * segundo
 else:
-     resultado = "Invalido "
+     resultado = "Invalido"
 
 print(resultado) 
     
