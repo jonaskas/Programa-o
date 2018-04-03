@@ -7,7 +7,7 @@ resultado = 0
 contar = 0
 soma = 0
 while True: 
-    numero=int(input('Introduza um valor: '))
+    numero = int(input('Introduza um valor: '))
     if numero == -1 :
         break
 
