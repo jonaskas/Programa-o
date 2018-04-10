@@ -10,12 +10,13 @@ def convertor_euro(quantidade):
 def convertor_dolar(quantidade):
     return (quantidade * dolar) / 1
 
-def teste():
-    escolha = input("Introduza em que moeda queres converter €(E) ou $(D): ")
-    quantidade = float(input('Introduza uma quantidade: '))
+def teste(escolha, quantidade):
+
     if escolha == 'E':
         print ('{}€ sao {}$'.format(quantidade, convertor_euro(quantidade)))
     elif escolha == 'D':
         print ('{}$ sao {}€'.format(quantidade, convertor_dolar(quantidade)))
 
-teste()
+escolha = input("Introduza em que moeda queres converter €(E) ou $(D): ")
+quantidade = float(input('Introduza uma quantidade: '))
+teste(escolha, quantidade)
