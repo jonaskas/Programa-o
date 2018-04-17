@@ -3,12 +3,11 @@ Exxercicio 4
 """
 
 def imprimir(n):
-    if n == -1:
-        return 0
-    elif imprimir(n -1):
-        return n 
-    print(n)
+    if n > 0:
+       imprimir(n -1)
 
+    print(n,end=" ")
+    
 numero = int(input('Introduza um numero: '))
 
 imprimir(numero)
