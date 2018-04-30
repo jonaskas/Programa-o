@@ -70,8 +70,7 @@ def menu_utilizador(self):
     print("*"*25)
     resposta = input("Resposta:")
     if resposta == 1:
-        def __str__(self):
-            return "Nome: {}\nemail: {}\npassword: {}\nID: {}\nBloaquedo: {}\nResposta Secreta: {}\nData de Criação: {}\nData do ultimo login: {}".format(self.nome, self.email, self.password, self.id, self.bloquear, self.resp_secreta, self.data_criacao, self.ultimo_login)
+        return "Nome: {}\nemail: {}\npassword: {}\nID: {}\nBloaquedo: {}\nResposta Secreta: {}\nData de Criação: {}\nData do ultimo login: {}".format(self.nome, self.email, self.password, self.id, self.bloquear, self.resp_secreta, self.data_criacao, self.ultimo_login)
    
 
 
@@ -98,8 +97,5 @@ person2.data_criacao = time.strftime("%d/%m/%Y")
 person2.resp_secreta = input("Qual é o nome do teu primeiro cão?\nResposta: ")  
 person2.bloquear = False
 print("\n"*3)
-
-
-
-print(validarlogin(self))
+print validarlogin()
 
