@@ -23,7 +23,7 @@ def media(myList):
 
 numeros = []
 x = 1
-while x <= 20:
+while x <= 10:
     n = int(input('Digite um número: [ %s ]: '%x))
     numeros.append(n)
     x += 1
