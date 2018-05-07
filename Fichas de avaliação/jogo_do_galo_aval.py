@@ -109,7 +109,7 @@ num_max_jogadas = 0
 vencedor = False
 while num_max_jogadas < 9:
     print(t)
-    jogada = input("{} Escolha as coordenadas!\nSe quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
+    jogada = input("{} Escolha as coordenadas(As letras tem de ser Maiúsculas)!\nSe quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
     if jogada == 9:
         print("O {} desistiu!! \n O venncedor é o {}.  ".format(j1.nome,j2.nome))
         break
