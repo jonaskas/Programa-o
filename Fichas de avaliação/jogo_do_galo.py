@@ -105,6 +105,7 @@ while num_max_jogadas < 9:
     if jogada == "X":
         print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador1.nome,jogador2.nome))
         break
+        
     tabuleiro1.validarjogada(jogada,jogador1.token)
     print(tabuleiro1)
     tabuleiro1.vitoria(jogador1.nome,jogador1.token)

@@ -64,14 +64,13 @@ class Tabuleiro():
             (self.lista[1][0] == token and self.lista[1][1] == token and self.lista[1][2] == token) or \
             (self.lista[2][0] == token and self.lista[2][1] == token and self.lista[2][2] == token) or \
             (self.lista[0][0] == token and self.lista[1][0] == token and self.lista[2][0] == token) or \
-            (self.lista[1][0] == token and self.lista[1][1] == token and self.lista[1][2] == token) or \
-            (self.lista[2][0] == token and self.lista[2][1] == token and self.lista[2][2] == token) or \
+            (self.lista[0][1] == token and self.lista[1][1] == token and self.lista[2][1] == token) or \
+            (self.lista[0][2] == token and self.lista[1][2] == token and self.lista[2][2] == token) or \
             (self.lista[0][0] == token and self.lista[1][1] == token and self.lista[2][2] == token) or \
             (self.lista[2][0] == token and self.lista[1][1] == token and self.lista[0][2] == token):
-            global vencedor
-            print("Vencedor")
-            vencedor = True
-        return vencedor
+            global winner
+            winner = True
+        return winner
 
 ###############################################
 
@@ -106,7 +105,7 @@ num_max_jogadas = 0
 
 ##############################################
 
-vencedor = False
+winner = False
 while num_max_jogadas < 9:
     print(t)
     jogada = input("{} Escolha as coordenadas(As letras tem de ser Maiúsculas)!\nSe quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
@@ -115,22 +114,22 @@ while num_max_jogadas < 9:
         break
     t.validarjogada(jogada,j1.token)
     print(t)
-    t.ver(j1.nome, j1.token)
-    if vencedor == True:
+    t.ver(j1.nome,j1.token)
+    if winner == True:
         print("O vencedor é ",j1.nome)
         break
     num_max_jogadas += 1
     if num_max_jogadas == 9:
         print("Empate")
         break
-    jogada = input("{} Escolha as coordenadas\n Se quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
+    jogada = input("{} Escolha as coordenadas\n Se quiser sair pressione a tecla 9.\n>>  ".format(j2.nome))
     if jogada == 9:
         print("O {} desistiu!! \n O venncedor é o {}.  ".format(j1.nome,j2.nome))
         break
     t.validarjogada(jogada,j2.token)
     print(t)
-    t.ver(j2.nome, j2.token)
-    if vencedor == True:
+    t.ver(j2.nome,j2.token)
+    if winner == True:
         print("O vencedor é ",j2.nome)
         break
     num_max_jogadas += 1
