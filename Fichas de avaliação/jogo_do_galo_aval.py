@@ -1,32 +1,17 @@
+"""
+Jogo do Galo
+"""
 
-import random
 
 
 class Tabuleiro():
     def __init__(self):
-        self.A = [None, None, None]
-        self.B = [None, None, None]
-        self.C = [None, None, None]
-        self.lista = [self.A, self.B, self.C]
+        self.lista = [ [None, None, None], 
+                       [None, None, None], 
+                       [None, None, None] ]
         
 
-    def devolvernumero(self, jogada1): 
-        if jogada1 == "A":
-            return 0
-        elif jogada1 == "B":
-            return 1
-        elif jogada1 == "C":
-            return 2 
-
-    def completar(self, jogada1, jogada2, token): 
-        v = self.devolvernumero(jogada1)
-        if (self.lista[jogada2][v]) == None:
-            self.lista[jogada2][v] += token
-            return True
-        else:
-            return False
-
-    def __str__(self): #Mostrar o tabuleiro
+    def __str__(self): #Foi buscar a Internet
         stroutput = "  A|B|C|"
         for i in range(0, 3):
             stroutput += "\n" + str(i+1) + "|"
@@ -37,77 +22,117 @@ class Tabuleiro():
                     stroutput += self.lista[i][j] + "|"
         return stroutput
 
-    def ver(self, token):
-        if  (self.lista[0][1] == token and self.lista[0][2] == token and self.lista[0][3] == token) or \
-            (self.lista[1][1] == token and self.lista[1][2] == token and self.lista[1][3] == token) or \
-            (self.lista[2][1] == token and self.lista[2][2] == token and self.lista[2][3] == token) or \
-            (self.lista[0][1] == token and self.lista[2][1] == token and self.lista[3][1] == token) or \
-            (self.lista[0][2] == token and self.lista[2][2] == token and self.lista[3][2] == token) or \
-            (self.lista[0][3] == token and self.lista[2][3] == token and self.lista[3][3] == token) or \
-            (self.lista[0][1] == token and self.lista[2][2] == token and self.lista[3][3] == token) or \
-            (self.lista[0][3] == token and self.lista[2][2] == token and self.lista[3][1] == token):
-            global play
-            print("Vencedor")
-            play = False
 
-    def escolha_coluna(self):
-        coluna = input("Escolha a coluna onde queres jogar!\n>")
-        if coluna != "a" and coluna != "b" and coluna != "c" and coluna != "A" and coluna != "B" and coluna != "C" :
-            print(coluna)
-            print("Coluna invalida!\nEscolha uma das colunas (A,B,C)\n")
-            coluna = input("Escolha a coluna onde queres jogar!\n>")
-        else: 
-           return jogada1 == coluna 
-        
-    
-    def escolha_linha(self):
-        linha = input("Escolha a linha onde queres jogar!\n>")
-        if linha < 0 and linha > 3 :
-            print(linha)
-            print("Linha invalida!\nEscolha uma das linhas (1,2,3)\n")
-            linha = input("Escolha a linha onde queres jogar!\n>")
-        else: 
-           return jogada2 == linha 
+    def validarjogada(self, jogada, token):        
+        if (jogada[0] == "A" or jogada[0] == "B" or jogada[0] == "C") and (jogada[1] == "1" or jogada[1] == "2" or jogada[1] == "3"):
+           
+            if jogada[0] == "A":
+                coluna = 0
+                linha = int(jogada [1]) - 1
+                if self.lista[linha][coluna] == None:
+                    self.lista[linha][coluna] = token
+                else:
+                    print("Jogada Inválida!!")
+                    jogada = input("Tente Outravez!\n>> ")
+                    self.validarjogada(jogada,token)
+            if jogada[0] == "B":
+                coluna = 1
+                linha = int(jogada [1]) - 1
+                if self.lista[linha][coluna] == None:
+                    self.lista[linha][coluna] = token
+                else:
+                    print("Jogada Inválida!!")
+                    jogada = input("Tente Outravez!\n>> ")
+                    self.validarjogada(jogada,token)
+            if jogada[0] == "C": 
+                coluna = 2
+                linha = int(jogada [1]) - 1
+                if self.lista[linha][coluna] == None:
+                    self.lista[linha][coluna] = token
+                else:
+                    print("Jogada Inválida!!")
+                    jogada = input("Tente Outravez!\n>> ")
+                    self.validarjogada(jogada,token)
+        else:
+            print("Jogada Inválida!!")
+            jogada = input("Tente Outravez!\n>> ")
+            self.validarjogada(jogada,token)
+
+          
+    def ver(self, token, nome):
+        if  (self.lista[0][0] == token and self.lista[0][1] == token and self.lista[0][2] == token) or \
+            (self.lista[1][0] == token and self.lista[1][1] == token and self.lista[1][2] == token) or \
+            (self.lista[2][0] == token and self.lista[2][1] == token and self.lista[2][2] == token) or \
+            (self.lista[0][0] == token and self.lista[1][0] == token and self.lista[2][0] == token) or \
+            (self.lista[1][0] == token and self.lista[1][1] == token and self.lista[1][2] == token) or \
+            (self.lista[2][0] == token and self.lista[2][1] == token and self.lista[2][2] == token) or \
+            (self.lista[0][0] == token and self.lista[1][1] == token and self.lista[2][2] == token) or \
+            (self.lista[2][0] == token and self.lista[1][1] == token and self.lista[0][2] == token):
+            global vencedor
+            print("Vencedor")
+            vencedor = True
+        return vencedor
+
+###############################################
 
 class jogador():
+    
+    def __init__(self):
+        self.nome = ""
+        self.token = ""
 
-    def escolhatoken(self):
-        #Os jogadores escolhem os seus nomes e tokens
-        nome1 = input("Jogador 1 escolha o nome que deseja utilizar: ")
-        token1 = input("Jogador 1 escolha o seu token: ")
-        nome2 = input("Jogador 2 escolha o nome que deseja utilizar: ")
-        token2 = input("Jogador 2 escolha o seu token: ")
-        while token2 == token1:
-            print("O seu token e igual ao do jogador 1.")
-            token2 = input(print("Jogador 2 escolha o seu token: "))
-        else:
-            pass
 
-play = True 
+    def validarjogador(self):
+        while j1.token == j2.token:
+            print("Token do Jogador 2 repetido!")
+            j2.token = input("[Jogador 2] Introduza um novo Token: ")
+        return self.token
+
+###############################################
+
+j1 = jogador()
+j1.nome = input('Introduza o seu nome: ')
+j1.token = input('Introduza um token: ')
+
+j2 = jogador()
+j2.nome = input('Introduza o seu nome: ')
+j2.token = input('Introduza um token: ')
+
+
 t = Tabuleiro()
-j = jogador()
-final = t.__str__()
-nume_max_jogadas = 0
+j1.validarjogador()
+t.__str__()
+num_max_jogadas = 0
 
-j.escolhatoken()  
-print(final)
-t.escolha_coluna()
-t.escolha_linha()
-jogada1 = str(jogada1)
-jogada2 = int(jogada2)    
-while nume_max_jogadas <= 9:
-         
- 
-    nume_max_jogadas += 1
-print(final)
+##############################################
 
+vencedor = False
+while num_max_jogadas < 9:
+    print(t)
+    jogada = input("{} Escolha as coordenadas!\nSe quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
+    if jogada == 9:
+        print("O {} desistiu!! \n O venncedor é o {}.  ".format(j1.nome,j2.nome))
+        break
+    t.validarjogada(jogada,j1.token)
+    print(t)
+    t.ver(j1.nome, j1.token)
+    if vencedor == True:
+        print("O vencedor é ",j1.nome)
+        break
+    num_max_jogadas += 1
+    if num_max_jogadas == 9:
+        print("Empate")
+        break
+    jogada = input("{} Escolha as coordenadas\n Se quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
+    if jogada == 9:
+        print("O {} desistiu!! \n O venncedor é o {}.  ".format(j1.nome,j2.nome))
+        break
+    t.validarjogada(jogada,j2.token)
+    print(t)
+    t.ver(j2.nome, j2.token)
+    if vencedor == True:
+        print("O vencedor é ",j2.nome)
+        break
+    num_max_jogadas += 1
+    
 
-
-"""
-
-    def __str__(self):
-        print(' |A |B |C |')
-        print('1|{} |{} |{} |'.format(self.lista[0][0], self.lista[0][1], self.lista[0][2]))
-        print('2|{} |{} |{} |'.format(self.lista[1][0], self.lista[1][1], self.lista[1][2]))
-        print('3|{} |{} |{} |'.format(self.lista[2][0], self.lista[2][1], self.lista[2][2]))
-"""

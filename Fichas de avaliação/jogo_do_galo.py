@@ -1,7 +1,6 @@
 ##Variaveis globais
 jogador_valido = False
 num_max_jogadas = 0
-winner = None
 
 ##Class Jogador
 class jogador():
@@ -27,9 +26,9 @@ class tabuleiro():
 
     def __str__(self):
         teste = "\n  A|B|C"
-        for i in range (0, 3):
-            teste += "\n" + str(i+1) + "|"
-            for j in range (0, 3):
+        for j in range (0, 3):
+            teste += "\n" + str(j+1) + "|"
+            for i in range (0, 3):
                 if self.tabuleiro[j][i] == None:
                     teste += " |"
                 else:
@@ -79,12 +78,10 @@ class tabuleiro():
             (self.tabuleiro[2][0] == token and self.tabuleiro[2][1] == token and self.tabuleiro[2][2] == token) or \
             (self.tabuleiro[0][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[2][2] == token) or \
             (self.tabuleiro[2][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[0][2] == token):
+            global winner
             winner = True
-            return winner
-  
-        
-
-
+        return winner
+    
 ##Introducao de dados
 ##Jogador 1
 jogador1 = jogador()
@@ -98,27 +95,34 @@ jogador2.token = input("[Jogador 2] Token que prente usar: ")
 ##Tabuleiro
 tabuleiro1 = tabuleiro()
 jogador1.validarjogador()    
-print(tabuleiro1.__str__())
+tabuleiro1.__str__()
 
 #Jogar
+winner = False
 while num_max_jogadas < 9:
-    jogada = input("[{}] Onde pretende jogar: ".format(jogador1.nome))
+    print(tabuleiro1)
+    jogada = input("[{}] Onde pretende jogar:\n Se pretender desistir clique X:   ".format(jogador1.nome))
+    if jogada == "X":
+        print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador1.nome,jogador2.nome))
+        break
     tabuleiro1.validarjogada(jogada,jogador1.token)
     print(tabuleiro1)
     tabuleiro1.vitoria(jogador1.nome,jogador1.token)
     if winner == True:
-        print("O vencedor é o: ",jogador1.nome)
+        print("O vencedor é ",jogador1.nome)
         break
     num_max_jogadas += 1
     if num_max_jogadas == 9:
-     print("empate")
-    
+        print("Empate")
+        break
     jogada = input("[{}] Onde pretende jogar: ".format(jogador2.nome))
+    if jogada == "X":
+        print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador2.nome,jogador1.nome))
+        break
     tabuleiro1.validarjogada(jogada,jogador2.token)
     print(tabuleiro1)
     tabuleiro1.vitoria(jogador2.nome,jogador2.token)
     if winner == True:
-        print("O vencedor é o: ",jogador2.nome)
+        print("O vencedor é ",jogador2.nome)
         break
-    num_max_jogadas += 1
-
+num_max_jogadas += 1
