@@ -21,7 +21,7 @@ class Tabuleiro():
     def completar(self, jogada1, jogada2, token): 
         v = self.devolvernumero(jogada1)
         if (self.lista[jogada2][v]) == None:
-            self.lista[jogada2][v] = token
+            self.lista[jogada2][v] += token
             return True
         else:
             return False
@@ -50,34 +50,58 @@ class Tabuleiro():
             print("Vencedor")
             play = False
 
-    def escolha_coluna(self, jogada1):
+    def escolha_coluna(self):
         coluna = input("Escolha a coluna onde queres jogar!\n>")
-        while coluna != "a" or coluna != "b" or coluna != "c" or coluna != "A" or coluna != "B" or coluna != "C" :
+        if coluna != "a" and coluna != "b" and coluna != "c" and coluna != "A" and coluna != "B" and coluna != "C" :
+            print(coluna)
             print("Coluna invalida!\nEscolha uma das colunas (A,B,C)\n")
             coluna = input("Escolha a coluna onde queres jogar!\n>")
         else: 
            return jogada1 == coluna 
         
     
-    def escolha_linha(self, jogada2):
+    def escolha_linha(self):
         linha = input("Escolha a linha onde queres jogar!\n>")
-        while linha != 1 or linha != 2 or linha != 3 :
+        if linha < 0 and linha > 3 :
+            print(linha)
             print("Linha invalida!\nEscolha uma das linhas (1,2,3)\n")
             linha = input("Escolha a linha onde queres jogar!\n>")
         else: 
            return jogada2 == linha 
-    
+
+class jogador():
+
+    def escolhatoken(self):
+        #Os jogadores escolhem os seus nomes e tokens
+        nome1 = input("Jogador 1 escolha o nome que deseja utilizar: ")
+        token1 = input("Jogador 1 escolha o seu token: ")
+        nome2 = input("Jogador 2 escolha o nome que deseja utilizar: ")
+        token2 = input("Jogador 2 escolha o seu token: ")
+        while token2 == token1:
+            print("O seu token e igual ao do jogador 1.")
+            token2 = input(print("Jogador 2 escolha o seu token: "))
+        else:
+            pass
+
+play = True 
 t = Tabuleiro()
-play = True
-token = "x"
-print "%s" % (t.escolha_coluna())
-t.escolha_linha()          
+j = jogador()
+final = t.__str__()
+nume_max_jogadas = 0
+
+j.escolhatoken()  
+print(final)
+t.escolha_coluna()
+t.escolha_linha()
 jogada1 = str(jogada1)
-jogada2 = int(jogada2)
-final = Tabuleiro()
+jogada2 = int(jogada2)    
+while nume_max_jogadas <= 9:
+         
+ 
+    nume_max_jogadas += 1
 print(final)
-final.completar(jogada1, jogada2, token)
-print(final)
+
+
 
 """
 
