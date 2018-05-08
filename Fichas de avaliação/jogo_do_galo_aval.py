@@ -5,12 +5,12 @@ Jogo do Galo
 
 
 class Tabuleiro():
+   
     def __init__(self):
         self.lista = [ [None, None, None], 
                        [None, None, None], 
                        [None, None, None] ]
         
-
     def __str__(self): #Foi buscar a Internet
         stroutput = "  A|B|C|"
         for i in range(0, 3):
@@ -22,10 +22,8 @@ class Tabuleiro():
                     stroutput += self.lista[i][j] + "|"
         return stroutput
 
-
     def validarjogada(self, jogada, token):        
-        if (jogada[0] == "A" or jogada[0] == "B" or jogada[0] == "C") and (jogada[1] == "1" or jogada[1] == "2" or jogada[1] == "3"):
-           
+        if (jogada[0] == "A" or jogada[0] == "B" or jogada[0] == "C" or jogada[0] == "a" or jogada[0] == "b" or jogada[0] == "c" ) and (jogada[1] == "1" or jogada[1] == "2" or jogada[1] == "3"):
             if jogada[0] == "A":
                 coluna = 0
                 linha = int(jogada [1]) - 1
@@ -45,6 +43,33 @@ class Tabuleiro():
                     jogada = input("Tente Outravez!\n>> ")
                     self.validarjogada(jogada,token)
             if jogada[0] == "C": 
+                coluna = 2
+                linha = int(jogada [1]) - 1
+                if self.lista[linha][coluna] == None:
+                    self.lista[linha][coluna] = token
+                else:
+                    print("Jogada Inválida!!")
+                    jogada = input("Tente Outravez!\n>> ")
+                    self.validarjogada(jogada,token)
+            if jogada[0] == "a":
+                coluna = 0
+                linha = int(jogada [1]) - 1
+                if self.lista[linha][coluna] == None:
+                    self.lista[linha][coluna] = token
+                else:
+                    print("Jogada Inválida!!")
+                    jogada = input("Tente Outravez!\n>> ")
+                    self.validarjogada(jogada,token)
+            if jogada[0] == "b":
+                coluna = 1
+                linha = int(jogada [1]) - 1
+                if self.lista[linha][coluna] == None:
+                    self.lista[linha][coluna] = token
+                else:
+                    print("Jogada Inválida!!")
+                    jogada = input("Tente Outravez!\n>> ")
+                    self.validarjogada(jogada,token)
+            if jogada[0] == "c": 
                 coluna = 2
                 linha = int(jogada [1]) - 1
                 if self.lista[linha][coluna] == None:
@@ -102,35 +127,37 @@ t = Tabuleiro()
 j1.validarjogador()
 t.__str__()
 num_max_jogadas = 0
-
+winner = False
 ##############################################
 
-winner = False
+
 while num_max_jogadas < 9:
-    print(t)
-    jogada = input("{} Escolha as coordenadas(As letras tem de ser Maiúsculas)!\nSe quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
-    if jogada == 9:
-        print("O {} desistiu!! \n O venncedor é o {}.  ".format(j1.nome,j2.nome))
+    print(t.__str__())
+    jogada = input("{} Escolha as coordenadas\nSe quiser sair pressione a tecla 9.\n>>  ".format(j1.nome))
+    if jogada == "9":
+        print("O {} desistiu!! \nO venncedor é o {}. ".format(j1.nome, j2.nome))
         break
-    t.validarjogada(jogada,j1.token)
-    print(t)
-    t.ver(j1.nome,j1.token)
+    else:
+        t.validarjogada(jogada, j1.token)
+        print(t.__str__())
+        t.ver(j1.nome, j1.token)
     if winner == True:
-        print("O vencedor é ",j1.nome)
+        print("O vencedor é ", j1.nome)
         break
     num_max_jogadas += 1
     if num_max_jogadas == 9:
         print("Empate")
         break
-    jogada = input("{} Escolha as coordenadas\n Se quiser sair pressione a tecla 9.\n>>  ".format(j2.nome))
-    if jogada == 9:
-        print("O {} desistiu!! \n O venncedor é o {}.  ".format(j1.nome,j2.nome))
+    jogada = input("{} Escolha as coordenadas\nSe quiser desistir pressione a tecla 9.\n>>  ".format(j2.nome))
+    if jogada == "9":
+        print("O {} desistiu!! \nO venncedor é o {}. ".format(j2.nome, j1.nome))
         break
-    t.validarjogada(jogada,j2.token)
-    print(t)
-    t.ver(j2.nome,j2.token)
+    else:
+        t.validarjogada(jogada, j2.token)
+        print(t.__str__())
+        t.ver(j2.nome, j2.token)
     if winner == True:
-        print("O vencedor é ",j2.nome)
+        print("O vencedor é ", j2.nome)
         break
     num_max_jogadas += 1
     
