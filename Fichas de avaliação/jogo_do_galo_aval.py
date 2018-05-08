@@ -26,6 +26,7 @@ class Tabuleiro():
 
 #Colocar o token na coluna e linha certa
 #O jogador introduz 2 carateres sendo que o primeiro caracter e a coluna e o segundo caracter e a linha
+#Pedimos ajuda a um colega(Andre Ferreira)e ele forneceu-nos este codigo
     def validarjogada(self, jogada, token):        
         if (jogada[0] == "A" or jogada[0] == "B" or jogada[0] == "C" or jogada[0] == "a" or jogada[0] == "b" or jogada[0] == "c" ) and (jogada[1] == "1" or jogada[1] == "2" or jogada[1] == "3"):
             if jogada[0] == "A":
