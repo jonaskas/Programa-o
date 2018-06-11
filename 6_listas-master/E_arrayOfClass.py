@@ -9,7 +9,9 @@ for i in range(len(students)):
     print(students[i], ":", grades[i])
 
 students.append("Student 5")
-
+grades.append(3)
+for i in range(len(students)):
+    print(students[i], ":", grades[i])
 """
 result of: 
 

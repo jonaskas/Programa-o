@@ -1,0 +1,3 @@
+Nome,Token,Pontuação,Jogos
+João,A,60,10
+André,B,30,10

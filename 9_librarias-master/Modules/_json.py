@@ -5,8 +5,6 @@ json
 import json
 import os
 
-filePath = os.path.join("_temp", "json.log")
-
 grades = {
     "student1": [10, 11, 12],
     "student2": [15, 14, 14],
@@ -16,6 +14,9 @@ grades = {
 
 json_ = json.dumps(grades)
 print(json_)
+
+
+filePath = os.path.join("_temp", "json.log")
 
 with open(filePath, "w") as file:
     json.dump(grades, file)
